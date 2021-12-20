@@ -147,14 +147,19 @@ function verification(e) {
 
 //送出訂單
 function addOrder() {
+    const name = document.querySelector("#customerName")
+    const tel = document.querySelector("#customerPhone")
+    const email = document.querySelector("#customerEmail")
+    const address = document.querySelector("#customerAddress")
+    const payment = document.querySelector("#tradeWay")
     let data = {
         data: {
             user: {
-                name: "六角學院",
-                tel: "07-5313506",
-                email: "hexschool@hexschool.com",
-                address: "高雄市六角學院路",
-                payment: "Apple Pay"
+                "name": name.value,
+                "tel": tel.value,
+                "email": email.value,
+                "address": address.value,
+                "payment": payment.value
             }
         }
     };
