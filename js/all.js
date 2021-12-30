@@ -44,7 +44,7 @@ function getCarts() {
         .get(`${baseUrl}/api/livejs/v1/customer/${api_path}/carts`)
         .then((res) => {
             cartData = res.data.carts;
-            document.querySelector(".js_total").textContent = res.data.finalTotal;
+            document.querySelector(".js_total").textContent = numberWithCommas(res.data.finalTotal);
 
             renderCart(cartData);
         })
@@ -57,20 +57,20 @@ function renderCart(cartData) {
     cartData.forEach((item) => {
         str += `<tr>
             <td>
-              <div class="cardItem-title">
+                <div class="cardItem-title">
                 <img src=${item.product.images} alt="">
                 <p>${item.product.title}</p>
-              </div>
+                </div>
             </td>
             <td>NT$${numberWithCommas(item.product.price)}</td>
             <td>${item.quantity}</td>
             <td>NT$${numberWithCommas(item.product.price * item.quantity)}</td>
             <td class="discardBtn">
-              <a href="#" class="material-icons" data-id=${item.id}>
+                <a href="#" class="material-icons" data-id=${item.id}>
                 clear
-              </a>
+                </a>
             </td>
-          </tr>`;
+            </tr>`;
     });
     cartList.innerHTML = str;
 }
@@ -147,14 +147,19 @@ function verification(e) {
 
 //送出訂單
 function addOrder() {
+    const name = document.querySelector("#customerName")
+    const tel = document.querySelector("#customerPhone")
+    const email = document.querySelector("#customerEmail")
+    const address = document.querySelector("#customerAddress")
+    const payment = document.querySelector("#tradeWay")
     let data = {
         data: {
             user: {
-                name: "六角學院",
-                tel: "07-5313506",
-                email: "hexschool@hexschool.com",
-                address: "高雄市六角學院路",
-                payment: "Apple Pay"
+                "name": name.value,
+                "tel": tel.value,
+                "email": email.value,
+                "address": address.value,
+                "payment": payment.value
             }
         }
     };
